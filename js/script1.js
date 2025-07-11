@@ -6,7 +6,7 @@ const categoryFilter = document.getElementById('categoryFilter');
 const sortSelect = document.getElementById('sortSelect');
 const productList = document.getElementById('product-list');
 
-// Helper: Get unique categories
+// Get unique categories
 function getCategories() {
     const categories = products.map(p => p.category).filter(Boolean);
     return [...new Set(categories)];
@@ -15,7 +15,6 @@ function getCategories() {
 // Render category dropdown
 function renderCategoryOptions() {
     if (!categoryFilter) return;
-
     const categories = getCategories();
     categoryFilter.innerHTML = `<option value="">All Categories</option>`;
     categories.forEach(category => {
@@ -26,23 +25,23 @@ function renderCategoryOptions() {
     });
 }
 
-// Render all products
+// Render all products with search, filter, and sort
 function renderProducts() {
     let filtered = [...products];
 
-    // Search filter
+    // Search by name (across all categories)
     const searchValue = searchInput?.value.toLowerCase() || '';
     if (searchValue) {
-        filtered = filtered.filter(p => p.pname.toLowerCase().includes(searchValue));
+        filtered = filtered.filter(p => (p.pname || '').toLowerCase().includes(searchValue));
     }
 
-    // Category filter
+    // Filter by category
     const categoryValue = categoryFilter?.value || '';
     if (categoryValue) {
         filtered = filtered.filter(p => p.category === categoryValue);
     }
 
-    // Sorting
+    // Sort by price
     const sortValue = sortSelect?.value || '';
     if (sortValue === 'low-high') {
         filtered.sort((a, b) => Number(a.productPrice) - Number(b.productPrice));
@@ -56,7 +55,6 @@ function renderProducts() {
     const row = document.createElement('div');
     row.className = 'row';
 
-
     filtered.forEach((product, index) => {
         const col = document.createElement('div');
         col.className = 'col-md-4';
@@ -64,7 +62,7 @@ function renderProducts() {
             <div class="card mb-3">
                 <img src="${product.productImage}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
-                    <p class="card-text"><strong>Name:</strong> ${product.pname}</p>
+                    <p class="card-text"><strong>Name:</strong> ${product.productName}</p>
                     <p class="card-text"><strong>Price:</strong> $${product.productPrice}</p>
                     <p class="card-text"><strong>Quantity:</strong> 
                         <button class="btn btn-sm btn-secondary me-1" onclick="increaseQuantity(${index})">+</button>
@@ -82,14 +80,12 @@ function renderProducts() {
     productList.appendChild(row);
 }
 
-// Increase quantity
+// Quantity controls
 function increaseQuantity(index) {
     products[index].productQuantity = Number(products[index].productQuantity) + 1;
     localStorage.setItem('products', JSON.stringify(products));
     renderProducts();
 }
-
-// Decrease quantity
 function decreaseQuantity(index) {
     if (products[index].productQuantity > 0) {
         products[index].productQuantity = Number(products[index].productQuantity) - 1;
@@ -106,16 +102,14 @@ function deleteProduct(index) {
     renderProducts();
 }
 
-// Edit product with prompt
+// Edit product
 function editProduct(index) {
     const product = products[index];
-
     const pname = prompt("Product name:", product.pname) || '';
     const productPrice = prompt("Product price:", product.productPrice) || '0';
     const productQuantity = prompt("Product quantity:", product.productQuantity) || '0';
     const productImage = prompt("Product image URL:", product.productImage) || '';
     const category = prompt("Product category:", product.category) || '';
-
     products[index] = {
         pname: pname.trim(),
         productPrice: Number(productPrice),
@@ -123,7 +117,6 @@ function editProduct(index) {
         productImage: productImage.trim(),
         category: category.trim()
     };
-
     localStorage.setItem('products', JSON.stringify(products));
     renderCategoryOptions();
     renderProducts();
