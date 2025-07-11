@@ -94,13 +94,13 @@ const deleteProduct = (index) => {
 
 const editProduct = (index) => {
     const product = products[index];
-    const pname = prompt("Product name:", product.productName) || '';
+    const productName = prompt("Product name:", product.productName) || '';
     const productPrice = prompt("Product price:", product.productPrice) || '0';
     const productQuantity = prompt("Product quantity:", product.productQuantity) || '0';
     const productImage = prompt("Product image URL:", product.productImage) || '';
     const category = prompt("Product category:", product.category) || '';
     products[index] = {
-        pname: pname.trim(),
+        productName: pname.trim(),
         productPrice: Number(productPrice),
         productQuantity: Number(productQuantity),
         productImage: productImage.trim(),
