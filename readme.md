@@ -8,7 +8,7 @@ Output
 
 2. View Product
 
-![alt text](./output/viw_product.png)
+![alt text](./output/view_product.png)
 
 # JavaScript Product Management App
 
