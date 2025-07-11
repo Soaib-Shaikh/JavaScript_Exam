@@ -55,7 +55,7 @@ const renderProducts = () => {
                 <img src="${product.productImage}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
                     <p class="card-text"><strong>Name:</strong> ${product.productName}</p>
-                    <p class="card-text"><strong>Price:</strong> Rs:${product.productPrice}</p>
+                    <p class="card-text"><strong>Price:</strong> Rs: ${product.productPrice}</p>
                     <p class="card-text"><strong>Quantity:</strong>
                         <button class="btn btn-sm btn-secondary ms-1" onclick="decreaseQuantity(${index})">-</button> 
                             <span id="qty-${index}">${product.productQuantity}</span>
