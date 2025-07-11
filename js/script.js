@@ -6,24 +6,21 @@ let form = document.getElementById('form');
 
 let products = JSON.parse(localStorage.getItem('products')) || [];
 
-const addProduct = () => {
     form.addEventListener('submit',(e)=>{
     e.preventDefault();
 
     let product = {
         id: Date.now(),
-        productname:pname.value,
-        productPrice:price.value,
-        productQuantity:qty.value,
-        productImage:img_url.value
+        productName:productName.value.trim(),
+        productPrice:productPrice.value.trim(),
+        productQuantity:productQuantity.value.trim(),
+        productImage:productImage.value.trim(),
     };
 
     products.push(product);
     localStorage.setItem('products',JSON.stringify(products))
     form.reset();
     alert('Product Added Successfully');
-    
 })
-}
 
-addProduct();
+

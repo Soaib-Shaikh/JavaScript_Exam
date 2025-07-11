@@ -44,23 +44,30 @@
 
     <!-- main section start-->
     <main>
-        <div class="container">
-            <div class="row">
+
+        <div class="container my-4">
+            <div class="row g-2 align-items-center">
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Product Name</h5>
-                            <p class="card-text">Price: $00</p>
-                            <p class="card-text">Quantity: 0</p>
-                            <button class="btn btn-primary" type="button">Buy Now</button>
-                        </div>
-                    </div>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search by product name">
+                </div>
+                <div class="col-md-3">
+                    <select id="categoryFilter" class="form-select">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="sortSelect" class="form-select">
+                        <option value="">Sort by Price</option>
+                        <option value="low-high">Low to High</option>
+                        <option value="high-low">High to Low</option>
+                    </select>
                 </div>
             </div>
         </div>
+
+        <div id="product-list"></div>
     </main>
-     <!-- main section end-->
+    <!-- main section end-->
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
