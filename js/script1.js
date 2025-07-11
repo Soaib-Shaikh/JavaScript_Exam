@@ -100,7 +100,7 @@ const editProduct = (index) => {
     const productImage = prompt("Product image URL:", product.productImage) || '';
     const category = prompt("Product category:", product.category) || '';
     products[index] = {
-        productName: pname.trim(),
+        productName: productName.trim(),
         productPrice: Number(productPrice),
         productQuantity: Number(productQuantity),
         productImage: productImage.trim(),
